@@ -3,7 +3,7 @@
 
 https://docs.google.com/spreadsheets/d/1OEdVqGulcRb7swmpJEuIoMCBI0i-Q-JK5RXZwIMX3b4/edit?usp=sharing
 
-Jurnale de activitate
+Jurnale de activitate:
 
 Alexandru-Gabriel Oanea
 
