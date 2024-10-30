@@ -9,3 +9,8 @@ Alexandru-Gabriel Oanea
 
 <a href="https://emoji.gg/emoji/3370-utilityarrow"><img src="https://cdn3.emoji.gg/emojis/3370-utilityarrow.png" width="64px" height="64px" alt="UtilityArrow"></a>
 https://docs.google.com/spreadsheets/d/1lksreR4tv7gin6Cmv_8r1fm-aigdlP0_5ojXUjmeOGc/edit?usp=sharing
+
+Diana-Cristina Butnariu
+<a href="https://emoji.gg/emoji/3370-utilityarrow"><img src="https://cdn3.emoji.gg/emojis/3370-utilityarrow.png" width="64px" height="64px" alt="UtilityArrow"></a>
+https://docs.google.com/spreadsheets/d/10YglnoiW5NZpXxotfFcNXngAAq_UcN55dCQze3xCsUQ/edit?usp=sharing
+
