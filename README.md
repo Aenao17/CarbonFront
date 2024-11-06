@@ -25,4 +25,3 @@ Ovidiu-Andrei Taciuc
 <a href="https://emoji.gg/emoji/3370-utilityarrow"><img src="https://cdn3.emoji.gg/emojis/3370-utilityarrow.png" width="64px" height="64px" alt="UtilityArrow"></a>
 https://docs.google.com/spreadsheets/d/1qcYI3YRPXMpu0kJ-LIlsi35eV-j8r_vle7KnF_VSQ2M/edit?usp=sharing
 
-
