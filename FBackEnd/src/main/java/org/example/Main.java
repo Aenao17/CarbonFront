@@ -1,6 +1,5 @@
 package org.example;
 
-import org.example.Domain.Question;
 import org.example.Repository.*;
 import org.example.Service.IService;
 import org.example.Service.Service;
@@ -11,8 +10,7 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.Callable;
-
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"org.example"})
 public class Main {
 
     // URL for external API interaction (not currently used)

@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.example.Security.JwtUtil;
+import org.springframework.web.bind.annotation.RequestHeader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +23,7 @@ public class RestService {
     UserRepository userRepository;
     QuestionRepository questionRepository;
     SurveyRepository surveyRepository;
-
+    private final JwtUtil jwtUtil = new JwtUtil();
     // Map to hold logged-in clients
     private Map<String, IObserver> loggedClients = new HashMap<>();
 
@@ -35,7 +37,16 @@ public class RestService {
         this.questionRepository = questionRepository;
         this.surveyRepository = surveyRepository;
     }
+    @RequestMapping(method = RequestMethod.GET, value = "/secure-data")
+    public ResponseEntity<?> getSecureData(@RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.replace("Bearer ", "");
+        String username = jwtUtil.validateToken(token);
 
+        if (username != null) {
+            return ResponseEntity.ok("Secure data accessed by user: " + username);
+        }
+        return ResponseEntity.status(401).body("Unauthorized");
+    }
     // Endpoint to retrieve all users
     @RequestMapping(method = RequestMethod.GET)
     public List<User> getAllUsers() throws Exception {
