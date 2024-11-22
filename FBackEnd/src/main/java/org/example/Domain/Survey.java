@@ -1,11 +1,10 @@
 package org.example.Domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import jakarta.persistence.*;
-
 import java.util.List;
-import java.util.Map;
 
 /**
  * Entity representing a survey.
@@ -21,25 +20,33 @@ public class Survey implements Entity<Integer> {
     @Column(name = "userId")
     private Integer userId;
 
-    @Column(name = "questionAnswers")
-    private String questionAnswersJson;
+    @Column(name = "questionsIds")
+    private String questionIdsJson;
+
+    @Column(name = "answers")
+    private String answersJson;
 
     @Transient
-    private Map<Integer, List<String>> questionAnswers;
+    private List<Integer> questionIds;
+
+    @Transient
+    private List<String> answers;
 
     private static final Gson gson = new Gson();
 
     /**
      * Constructor with all fields.
      *
-     * @param id the ID of the survey
-     * @param userId the ID of the associated user
-     * @param questionAnswers a map of question IDs to their corresponding answers
+     * @param id        the ID of the survey
+     * @param userId    the ID of the associated user
+     * @param questionIds a list of question IDs
+     * @param answers   a list of corresponding answers
      */
-    public Survey(Integer id, Integer userId, Map<Integer, List<String>> questionAnswers) {
+    public Survey(Integer id, Integer userId, List<Integer> questionIds, List<String> answers) {
         this.id = id;
         this.userId = userId;
-        setQuestionAnswers(questionAnswers); // Converts map to JSON
+        setQuestionIds(questionIds);
+        setAnswers(answers);
     }
 
     /**
@@ -86,25 +93,48 @@ public class Survey implements Entity<Integer> {
     }
 
     /**
-     * Gets the question-answer map for the survey.
+     * Gets the list of question IDs for the survey.
      *
-     * @return a map of question IDs to lists of answers
+     * @return a list of question IDs
      */
-    public Map<Integer, List<String>> getQuestionAnswers() {
-        if (questionAnswers == null && questionAnswersJson != null) {
-            // Deserialize JSON to Map if not already done
-            questionAnswers = gson.fromJson(questionAnswersJson, new TypeToken<Map<Integer, List<String>>>() {}.getType());
+    public List<Integer> getQuestionsIds() {
+        if (questionIds == null && questionIdsJson != null) {
+            // Deserialize JSON to List<Integer> correctly using Gson
+            questionIds = gson.fromJson(questionIdsJson, new TypeToken<List<Integer>>(){}.getType());
         }
-        return questionAnswers;
+        return questionIds;
     }
 
     /**
-     * Sets the question-answer map for the survey.
+     * Sets the list of question IDs for the survey.
      *
-     * @param questionAnswers a map of question IDs to lists of answers
+     * @param questionIds a list of question IDs
      */
-    public void setQuestionAnswers(Map<Integer, List<String>> questionAnswers) {
-        this.questionAnswers = questionAnswers;
-        this.questionAnswersJson = gson.toJson(questionAnswers); // Converts map to JSON
+    public void setQuestionIds(List<Integer> questionIds) {
+        this.questionIds = questionIds;
+        this.questionIdsJson = gson.toJson(questionIds); // Converts list to JSON
+    }
+
+    /**
+     * Gets the list of answers for the survey.
+     *
+     * @return a list of answers
+     */
+    public List<String> getAnswers() {
+        if (answers == null && answersJson != null) {
+            // Deserialize JSON to List<String> correctly using Gson
+            answers = gson.fromJson(answersJson, new TypeToken<List<String>>(){}.getType());
+        }
+        return answers;
+    }
+
+    /**
+     * Sets the list of answers for the survey.
+     *
+     * @param answers a list of answers
+     */
+    public void setAnswers(List<String> answers) {
+        this.answers = answers;
+        this.answersJson = gson.toJson(answers); // Converts list to JSON
     }
 }
