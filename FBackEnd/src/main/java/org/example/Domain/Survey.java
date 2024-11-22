@@ -21,13 +21,13 @@ public class Survey implements Entity<Integer> {
     private Integer userId;
 
     @Column(name = "questionsIds")
-    private String questionIdsJson;
+    private String questionsIdsJson;
 
     @Column(name = "answers")
     private String answersJson;
 
     @Transient
-    private List<Integer> questionIds;
+    private List<Integer> questionsIds;
 
     @Transient
     private List<String> answers;
@@ -98,11 +98,11 @@ public class Survey implements Entity<Integer> {
      * @return a list of question IDs
      */
     public List<Integer> getQuestionsIds() {
-        if (questionIds == null && questionIdsJson != null) {
+        if (questionsIds == null && questionsIdsJson != null) {
             // Deserialize JSON to List<Integer> correctly using Gson
-            questionIds = gson.fromJson(questionIdsJson, new TypeToken<List<Integer>>(){}.getType());
+            questionsIds = gson.fromJson(questionsIdsJson, new TypeToken<List<Integer>>(){}.getType());
         }
-        return questionIds;
+        return questionsIds;
     }
 
     /**
@@ -111,8 +111,8 @@ public class Survey implements Entity<Integer> {
      * @param questionIds a list of question IDs
      */
     public void setQuestionIds(List<Integer> questionIds) {
-        this.questionIds = questionIds;
-        this.questionIdsJson = gson.toJson(questionIds); // Converts list to JSON
+        this.questionsIds = questionIds;
+        this.questionsIdsJson = gson.toJson(questionIds); // Converts list to JSON
     }
 
     /**
