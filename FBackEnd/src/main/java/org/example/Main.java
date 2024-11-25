@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.Domain.Survey;
 import org.example.Repository.*;
 import org.example.Service.IService;
 import org.example.Service.Service;
@@ -9,6 +10,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.*;
 import java.util.concurrent.Callable;
 @SpringBootApplication(scanBasePackages = {"org.example"})
 public class Main {

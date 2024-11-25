@@ -1,5 +1,6 @@
 package org.example.Service;
 
+import org.example.Domain.Survey;
 import org.example.Domain.User;
 import org.example.Repository.QuestionRepository;
 import org.example.Repository.SurveyRepository;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.example.Security.JwtUtil;
 import org.springframework.web.bind.annotation.RequestHeader;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,10 +22,11 @@ import java.util.concurrent.Executors;
 public class RestService {
 
     // Repositories for handling User, Question, and Survey data
+    private final JwtUtil jwtUtil = new JwtUtil();
     UserRepository userRepository;
     QuestionRepository questionRepository;
     SurveyRepository surveyRepository;
-    private final JwtUtil jwtUtil = new JwtUtil();
+
     // Map to hold logged-in clients
     private Map<String, IObserver> loggedClients = new HashMap<>();
 
@@ -37,6 +40,7 @@ public class RestService {
         this.questionRepository = questionRepository;
         this.surveyRepository = surveyRepository;
     }
+
     @RequestMapping(method = RequestMethod.GET, value = "/secure-data")
     public ResponseEntity<?> getSecureData(@RequestHeader("Authorization") String authHeader) {
         String token = authHeader.replace("Bearer ", "");
@@ -47,12 +51,8 @@ public class RestService {
         }
         return ResponseEntity.status(401).body("Unauthorized");
     }
-    // Endpoint to retrieve all users
-    @RequestMapping(method = RequestMethod.GET)
-    public List<User> getAllUsers() throws Exception {
-        System.out.println("GET ALL USERS FROM REST SERVICE");
-        return userRepository.getAll();
-    }
+
+
 
     // Endpoint to create a new user
     @RequestMapping(method = RequestMethod.POST)

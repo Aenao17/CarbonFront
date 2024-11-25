@@ -1,9 +1,11 @@
 package org.example.Repository;
 
+import org.example.Domain.Question;
 import org.example.Domain.Survey;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -26,6 +28,18 @@ public class SurveyHibernateRepository implements SurveyRepository {
     public List<Survey> getAll() {
         try (Session session = HibernateUtils.getSessionFactory().openSession()) {
             return session.createQuery("from Survey", Survey.class).getResultList();
+        }
+    }
+
+    @Override
+    public List<Integer> getAllSurveyQuestions() {
+        try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+            List<Survey> ls = session.createQuery("from Survey", Survey.class).getResultList();
+            List<Integer> questions = new ArrayList<>();
+            for (Survey survey : ls) {
+                survey.getQuestionsIds();
+            }
+            return questions;
         }
     }
 

@@ -3,6 +3,7 @@ package org.example.Service;
 
 import org.example.Domain.Question;
 import org.example.Repository.QuestionHibernateRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

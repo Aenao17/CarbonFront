@@ -1,6 +1,7 @@
 package org.example.Service;
 
 import org.example.Domain.Question;
+import org.example.Domain.Survey;
 import org.example.Domain.User;
 import org.example.Repository.QuestionRepository;
 import org.example.Repository.SurveyRepository;
@@ -60,6 +61,18 @@ public class Service implements IService {
     @Override
     public void addUser(User user) {
         userRepository.add(user);
+        // Notify all logged-in clients about the new user
+        executorService.submit(() -> {
+            for (IObserver client : loggedClients.values()) {
+                client.update();
+            }
+        });
+    }
+
+    // Method to add a new survey and notify all logged-in clients
+    @Override
+    public void addSurvey(Survey survey) {
+        surveyRepository.add(survey);
         // Notify all logged-in clients about the new user
         executorService.submit(() -> {
             for (IObserver client : loggedClients.values()) {
