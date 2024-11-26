@@ -5,12 +5,16 @@ import org.example.Domain.User;
 import org.example.Repository.QuestionRepository;
 import org.example.Repository.SurveyRepository;
 import org.example.Repository.UserRepository;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import org.example.Security.JwtUtil;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.HashMap;
 import java.util.List;
@@ -67,5 +71,23 @@ public class RestService {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String userError(Exception e) {
         return e.getMessage();
+    }
+
+    @Configuration
+    public class CorsConfig {
+
+        @Bean
+        public WebMvcConfigurer corsConfigurer() {
+            return new WebMvcConfigurer() {
+                @Override
+                public void addCorsMappings(CorsRegistry registry) {
+                    registry.addMapping("/**")
+                            .allowedOrigins("http://localhost:8100")
+                            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                            .allowedHeaders("*")
+                            .allowCredentials(true);
+                }
+            };
+        }
     }
 }

@@ -1,73 +1,91 @@
-import React from "react";
+import React, {useState} from "react";
 import {
     IonPage,
     IonContent,
     IonInput,
     IonButton,
     IonIcon,
-    IonText,
+    IonText, IonCardContent, IonCard,
 } from "@ionic/react";
 import { checkmarkCircleOutline, lockClosedOutline } from "ionicons/icons";
-import facebookImg from "../images/Facebook.png";
-import twitterImg from "../images/twitter.png";
-import "./Login.css";
-const Login: React.FC = () => {
+import facebookImg from "../pages/images/Facebook.png";
+import twitterImg from "../pages/images/twitter.png";
+import "./style/Login.css";
+const Login = () => {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleLogin =async() =>{
+        if(email == '' || password == ''){
+            alert('Please fill in all fields');
+            console.log(email + " " + password);
+            return;
+        }
+        const id=1;
+        const response = await fetch('http://localhost:8080/auth/login',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'id': id,
+                'username': email,
+                'password': password
+            }),
+            credentials: 'include'
+        });
+        const data = await response.json();
+
+        if(data.token !== undefined){
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('username', email);
+            window.location.href = '/home';
+        }
+    }
+
     return (
         <IonPage>
-            <IonContent className="login-content">
+            <IonCard className="login-content">
+            <IonCardContent className="login-content">
                 <div className="login-container">
                     <h1 className="login-title">Login</h1>
-                    <form className="login-form">
-                        {/* Input pentru Email */}
+
                         <div className="input-wrapper">
                             <IonInput
                                 type="email"
                                 placeholder="email"
                                 className="login-input"
+                                value={email}
+                                onIonChange={e => setEmail(e.detail.value!)}
                             />
                             <IonIcon icon={checkmarkCircleOutline} className="input-icon" />
                         </div>
 
-                        {/* Input pentru Parolă */}
+
                         <div className="input-wrapper">
                             <IonInput
                                 type="password"
                                 placeholder="password"
                                 className="login-input"
+                                value={password}
+                                onIonChange={e => setPassword(e.detail.value!)}
                             />
                             <IonIcon icon={lockClosedOutline} className="input-icon" />
                         </div>
 
-                        {/* Buton Login */}
-                        <IonButton expand="block" className="login-button">
+
+                        <IonButton expand="block" className="login-button" onClick={handleLogin}>
                             LOGIN
                         </IonButton>
-                    </form>
-
-                    {/* Link pentru Forgot Password */}
-                    <IonText className="forgot-password">Forgot your password?</IonText>
-
-                    {/* Connect with social media */}
-                    <div className="social-login">
-                        <IonText>connect with</IonText>
-                        <div className="social-buttons">
-                            <IonButton className="facebook-button">
-                                <img src={facebookImg} alt="Facebook" className="social-icon" />
-                                FACEBOOK
-                            </IonButton>
-                            <IonButton className="twitter-button">
-                                <img src={twitterImg} alt="Twitter" className="social-icon" />
-                                TWITTER
-                            </IonButton>
-                        </div>
-                    </div>
 
                     {/* Link pentru Sign Up */}
                     <IonText className="signup-text">
-                        Don’t have an account? <a href="#signup">Sign up</a>
+                        Don’t have an account? <a href="/register">Sign up</a>
                     </IonText>
                 </div>
-            </IonContent>
+            </IonCardContent>
+            </IonCard>
         </IonPage>
     );
 };

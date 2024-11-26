@@ -2,6 +2,8 @@ package org.example.Repository;
 
 import org.example.Domain.User;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,12 +23,26 @@ public class UserHibernateRepository implements UserRepository {
                     .getSingleResultOrNull();  // Return the found User or null if not found
         }
     }
-
     // Method to add a User to the database
     @Override
-    public void add(User elem) {
-        // Start a transaction and persist the User to the database
-        HibernateUtils.getSessionFactory().inTransaction(session -> session.persist(elem));
+    public void add(User user) {
+        try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+            try {
+                session.beginTransaction();
+                if (session.contains(user)) {
+                    session.persist(user);
+                } else {
+                    session.merge(user);
+                }
+                session.getTransaction().commit();
+            } catch (Exception e) {
+                session.getTransaction().rollback();
+                e.printStackTrace();
+            }
+            finally {
+                session.close();
+            }
+        }
     }
 
     // Method to get all Users from the database
@@ -46,6 +62,16 @@ public class UserHibernateRepository implements UserRepository {
             return session.createSelectionQuery("from User a where a.username like: usern and a.password like: passw ", User.class)
                     .setParameter("usern", username)  // Set the parameter for username
                     .setParameter("passw", password)  // Set the parameter for password
+                    .getSingleResultOrNull();  // Return the found User or null if not found
+        }
+    }
+
+    @Override
+    public User getByUsername(String username) {
+        // Open a session, execute the query to find User by username
+        try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+            return session.createSelectionQuery("from User a where a.username like: usern ", User.class)
+                    .setParameter("usern", username)  // Set the parameter for username
                     .getSingleResultOrNull();  // Return the found User or null if not found
         }
     }
