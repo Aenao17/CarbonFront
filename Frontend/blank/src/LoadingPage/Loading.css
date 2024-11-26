@@ -13,8 +13,9 @@
   }
   
   .image {
-    width: 550px;
+    width: 650px;
     height: auto;
+    margin-left: 110px;
   }
   
   .title {
