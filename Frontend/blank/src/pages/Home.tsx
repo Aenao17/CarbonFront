@@ -14,7 +14,7 @@ import home from '../imagine/Home.svg'
 import './Home.css';
 import { useState } from 'react';
 import femeie from '../imagine/femeie-cu-planta-removebg-preview.png'
-
+import grafic from '../imagine/grafic-removebg-preview.png'
 const Home: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0); // Tracks the active navigation button
   const middleIcons = [home, Leaderboard, Emissions , Goal]; // Icons from Ionicons library
@@ -46,7 +46,7 @@ const Home: React.FC = () => {
           {/* Chart Section */}
           <div className="chart">
             <img
-              src="/assets/graph-placeholder.png"
+              src={grafic}
               alt="Monthly Progress Chart"
               className="chart-image"
             />
