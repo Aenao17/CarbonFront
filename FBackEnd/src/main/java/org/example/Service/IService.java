@@ -1,6 +1,7 @@
 package org.example.Service;
 
 import org.example.Domain.Question;
+import org.example.Domain.Survey;
 import org.example.Domain.User;
 
 import java.util.List;
@@ -20,4 +21,7 @@ public interface IService {
 
     // Method to add a new question to the system
     void addQuestion(Question question);
+
+    // Method to add a new question to the system
+    void addSurvey(Survey survey);
 }
