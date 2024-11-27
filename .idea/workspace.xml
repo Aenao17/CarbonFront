@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c20456da-de28-4623-8efe-2b296e1d14c6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Frontend/blank/src/pages/Login.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/blank/src/pages/Register.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/blank/src/pages/style/Login.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/blank/src/pages/style/Register.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FBackEnd/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/FBackEnd/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FBackEnd/src/main/java/org/example/Domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/FBackEnd/src/main/java/org/example/Domain/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FBackEnd/src/main/java/org/example/Repository/HibernateUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/FBackEnd/src/main/java/org/example/Repository/HibernateUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FBackEnd/src/main/java/org/example/Repository/UserHibernateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/FBackEnd/src/main/java/org/example/Repository/UserHibernateRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FBackEnd/src/main/java/org/example/Repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/FBackEnd/src/main/java/org/example/Repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FBackEnd/src/main/java/org/example/Service/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/FBackEnd/src/main/java/org/example/Service/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FBackEnd/src/main/java/org/example/Service/RestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/FBackEnd/src/main/java/org/example/Service/RestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FBackEnd/src/main/java/org/example/Service/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/FBackEnd/src/main/java/org/example/Service/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FBackEnd/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/FBackEnd/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/blank/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/blank/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/blank/src/LoadingPage/Loading.css" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/blank/src/pages/style/Loading.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/blank/src/LoadingPage/Loading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/blank/src/pages/Loading.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/blank/src/pages/Home.css" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/blank/src/pages/style/Home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/blank/src/pages/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/blank/src/pages/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/blank/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/blank/tsconfig.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/FBackEnd">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/FBackEnd">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FBackEnd" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FBackEnd" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="FBackEnd" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2pPIiq42QG1cLPjl3zKQe3pvI7c" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build FBackEnd.executor": "Run",
+    "Gradle.FBackEnd [build].executor": "Run",
+    "Gradle.FBackEnd [run].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.Main.executor": "Run",
+    "ToolWindowGitHub Copilot Chat.ShowToolbar": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Master/Desktop/PC/backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Users\\Master\\Desktop\\internship\\m100-projects-teamn6\\Frontend\\blank\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Master\Desktop\internship\m100-projects-teamn6\Frontend\blank\src\pages" />
+      <recent name="C:\Users\Master\Desktop\internship\m100-projects-teamn6\Frontend\blank\src\pages\style" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.Main">
+    <configuration name="FBackEnd [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/FBackEnd" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="FBackEnd [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/FBackEnd" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Main" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="FBackEnd.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.Main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.FBackEnd [run]" />
+        <item itemvalue="Gradle.FBackEnd [build]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c20456da-de28-4623-8efe-2b296e1d14c6" name="Changes" comment="" />
+      <created>1732661418567</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732661418567</updated>
+      <workItem from="1732661420859" duration="3839000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

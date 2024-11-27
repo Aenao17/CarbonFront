@@ -1,5 +1,5 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import './Loading.css';
+import './style/Loading.css';
 import carbonFootprintImg from '../imagine/carbon-footprint-removebg-preview.png';
 
 const Loading: React.FC = () => {

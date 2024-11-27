@@ -4,7 +4,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import { IonRouterOutlet } from '@ionic/react';
 import { Route, Redirect } from 'react-router-dom';
 import Home from './pages/Home';
-import Loading from './LoadingPage/Loading';
+import Loading from './pages/Loading';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -35,6 +35,8 @@ import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 setupIonicReact();
 
@@ -44,7 +46,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 8000); // 8 seconds loading delay
+    }, 3000); // 3 seconds loading delay
     return () => clearTimeout(timer);
   }, []);
 
@@ -61,6 +63,15 @@ const App: React.FC = () => {
           </Route>
           <Route exact path="/">
             <Redirect to="/home" />
+          </Route>
+          <Route exact path="/loading">
+            <Loading />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/register">
+            <Register />
           </Route>
         </IonRouterOutlet>
       </IonReactRouter>

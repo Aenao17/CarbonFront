@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin
 public class AuthController {
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
@@ -21,17 +22,27 @@ public class AuthController {
         User user = userRepository.getByCredentials(loginRequest.getUsername(), loginRequest.getPassword());
         if (user != null) {
             String token = jwtUtil.generateToken(user.getUsername());
-            return ResponseEntity.ok().body(token);
+            return ResponseEntity.ok().body("{ \"token\":\""+token+"\"}");
         }
-        return ResponseEntity.status(401).body("Invalid username or password");
+        return ResponseEntity.status(401).body("{\"status\":\"Invalid username or password\"}");
+    }
+
+    @CrossOrigin(origins = "http://localhost:8100")
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody User registerRequest) {
+        if (userRepository.getByUsername(registerRequest.getUsername()) != null) {
+            return ResponseEntity.status(409).body("{\"status\":\"Username already exists\"}");
+        }
+        userRepository.add(registerRequest);
+        return ResponseEntity.ok("{\"status\":\"ok\"}");
     }
 
     @GetMapping("/validate")
     public ResponseEntity<?> validateToken(@RequestParam String token) {
         String username = jwtUtil.validateToken(token);
         if (username != null) {
-            return ResponseEntity.ok().body("Token is valid for user: " + username);
+            return ResponseEntity.ok().body("{Token is valid for user: " + username + "}");
         }
-        return ResponseEntity.status(401).body("Invalid token");
+        return ResponseEntity.status(401).body("{Invalid token}");
     }
 }

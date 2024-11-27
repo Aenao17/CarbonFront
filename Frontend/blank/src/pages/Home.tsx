@@ -11,7 +11,7 @@ import Leaderboard from '../imagine/Leaderbord.svg'
 import Emissions from '../imagine/Emissions.svg'
 import Goal from '../imagine/Goal.svg'
 import home from '../imagine/Home.svg'
-import './Home.css';
+import './style/Home.css';
 import { useState } from 'react';
 import femeie from '../imagine/femeie-cu-planta-removebg-preview.png'
 import grafic from '../imagine/grafic-removebg-preview.png'
@@ -22,6 +22,30 @@ const Home: React.FC = () => {
   const handleButtonClick = (index: number) => {
     setActiveIndex(index);
   };
+
+  const checkToken = () => {
+    const token=localStorage.getItem('token');
+    if(token === null){
+      window.location.href = '/login';
+    }
+    console.log(token);
+    //validate token
+    fetch('http://localhost:8080/auth/validate',{
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+        },
+        credentials: 'include'
+    }).then(response => {
+        if(response.status === 401){
+            window.location.href = '/login';
+        }
+    });
+
+  }
+
+  checkToken();
 
   return (
     <IonPage>
