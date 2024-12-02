@@ -1,72 +1,105 @@
 package org.example.Service;
 
-
+import org.example.Domain.Question;
 import org.example.Domain.Survey;
+import org.example.Repository.QuestionRepository;
 import org.example.Repository.SurveyHibernateRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/surveys")
 public class SurveyController {
     private final SurveyHibernateRepository surveyHibernateRepository;
+    private final QuestionRepository questionRepository;
 
-    public SurveyController(SurveyHibernateRepository surveyHibernateRepository) {
+    public SurveyController(SurveyHibernateRepository surveyHibernateRepository, QuestionRepository questionRepository) {
         this.surveyHibernateRepository = surveyHibernateRepository;
+        this.questionRepository = questionRepository;
     }
 
-    // Endpoint to retrieve all
+    // Retrieve all surveys
     @GetMapping
     public List<Survey> getAllSurveys() {
         return surveyHibernateRepository.getAll();
     }
 
-    // Endpoint to retrieve all questions
-    @GetMapping("/{id}/questions")
-    public List<Integer> getAllSurveyQuestions(@PathVariable int id) {
-        return SurveyHibernateRepository.find(id).getQuestionsIds();
+    // Retrieve survey questions details
+    @GetMapping("/{id}/questions/details")
+    public List<Question> getSurveyQuestionsDetails(@PathVariable int id) {
+        Survey survey = surveyHibernateRepository.find(id);
+        return survey.getQuestionsIds()
+                .stream()
+                .map(questionRepository::findById)
+                .collect(Collectors.toList());
     }
 
+    // Submit survey responses
     @PostMapping("/{id}/submit")
     public ResponseEntity<Integer> submitSurvey(@PathVariable Integer id, @RequestBody Survey survey) {
-        // Define hardcoded constants for specific question IDs
-        Map<Integer, Integer> constants = Map.of(
-                1, 2,
-                2, 3,
-                3, 5
-        );
+        Survey existingSurvey = surveyHibernateRepository.find(id);
+        List<Integer> existingQuestions = existingSurvey.getQuestionsIds();
 
-        // Initialize a total score
-        int totalScore = 0;
+        if (survey.getQuestionsIds().size() != existingQuestions.size()) {
+            return ResponseEntity.badRequest().body(-1); // Return an error score
+        }
 
-        // Iterate through questions and answers
-        List<Integer> questionIds = survey.getQuestionsIds();
-        List<String> answers = survey.getAnswers();
+        // Validate responses
+        for (int i = 0; i < existingQuestions.size(); i++) {
+            Question question = questionRepository.findById(existingQuestions.get(i));
+            String answer = survey.getAnswers().get(i);
 
-        for (int i = 0; i < questionIds.size(); i++) {
-            Integer questionId = questionIds.get(i);
-            String answer = answers.get(i);
-
-            try {
-                int numericAnswer = Integer.parseInt(answer);
-
-                totalScore += numericAnswer * constants.getOrDefault(questionId, 1);
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid answer for question ID " + questionId + ": " + answer);
+            if (!validateAnswer(question, answer)) {
+                return ResponseEntity.badRequest().body(-1);
             }
         }
 
+        // Calculate score
+        int totalScore = calculateScore(survey);
         return ResponseEntity.ok(totalScore);
     }
 
-    // Endpoint to retrieve by ID
-    @GetMapping("/{id}")
-    public Survey getSurveyById(@PathVariable Integer id) {
-        return SurveyHibernateRepository.find(id);
+    private boolean validateAnswer(Question question, String answer) {
+        if ("single-choice".equals(question.getType()) || "multiple-choice".equals(question.getType())) {
+            try {
+                int numericAnswer = Integer.parseInt(answer);
+                return numericAnswer > 0;
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    // Additional CRUD methods can be added here
+    private int calculateScore(Survey survey) {
+        Map<Integer, Integer> constants = Map.of(1, 2, 2, 3, 3, 5);
+        int totalScore = 0;
+
+        for (int i = 0; i < survey.getQuestionsIds().size(); i++) {
+            Integer questionId = survey.getQuestionsIds().get(i);
+            String answer = survey.getAnswers().get(i);
+
+            try {
+                int numericAnswer = Integer.parseInt(answer);
+                totalScore += numericAnswer * constants.getOrDefault(questionId, 1);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid answer for question ID " + questionId);
+            }
+        }
+        return totalScore;
+    }
+
+    // Add a new survey
+    @PostMapping
+    public ResponseEntity<?> createSurvey(@RequestBody Survey survey) {
+        if (survey.getQuestionsIds() == null || survey.getQuestionsIds().isEmpty()) {
+            return ResponseEntity.badRequest().body("Survey must include at least one question.");
+        }
+        surveyHibernateRepository.add(survey);
+        return ResponseEntity.ok("Survey created successfully.");
+    }
 }

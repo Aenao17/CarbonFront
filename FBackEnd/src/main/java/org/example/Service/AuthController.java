@@ -14,18 +14,21 @@ public class AuthController {
 
     public AuthController(UserRepository userRepository, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
-        this.jwtUtil = jwtUtil; // Spring injectează automat bean-ul JwtUtil
+        this.jwtUtil = jwtUtil;
     }
+
+    // Login endpoint
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User loginRequest) {
         User user = userRepository.getByCredentials(loginRequest.getUsername(), loginRequest.getPassword());
         if (user != null) {
             String token = jwtUtil.generateToken(user.getUsername());
-            return ResponseEntity.ok().body("{ \"token\":\""+token+"\"}");
+            return ResponseEntity.ok().body("{\"token\":\"" + token + "\"}");
         }
         return ResponseEntity.status(401).body("{\"status\":\"Invalid username or password\"}");
     }
 
+    // Register endpoint
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User registerRequest) {
         if (userRepository.getByUsername(registerRequest.getUsername()) != null) {
@@ -35,12 +38,13 @@ public class AuthController {
         return ResponseEntity.ok("{\"status\":\"ok\"}");
     }
 
+    // Validate JWT token
     @GetMapping("/validate")
     public ResponseEntity<?> validateToken(@RequestParam String token) {
         String username = jwtUtil.validateToken(token);
         if (username != null) {
-            return ResponseEntity.ok().body("{Token is valid for user: " + username + "}");
+            return ResponseEntity.ok("{\"status\":\"Token is valid for user: " + username + "\"}");
         }
-        return ResponseEntity.status(401).body("{Invalid token}");
+        return ResponseEntity.status(401).body("{\"status\":\"Invalid token\"}");
     }
 }
