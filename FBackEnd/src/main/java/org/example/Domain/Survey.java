@@ -3,7 +3,6 @@ package org.example.Domain;
 import jakarta.persistence.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.util.List;
 
 @jakarta.persistence.Entity
@@ -26,11 +25,11 @@ public class Survey implements Entity<Integer> {
     private List<Integer> questionsIds;
 
     @Transient
-    private List<String> answers;
+    private List<List<String>> answers;
 
     private static final Gson gson = new Gson();
 
-    public Survey(Integer id, Integer userId, List<Integer> questionIds, List<String> answers) {
+    public Survey(Integer id, Integer userId, List<Integer> questionIds, List<List<String>> answers) {
         this.id = id;
         this.userId = userId;
         setQuestionIds(questionIds);
@@ -71,14 +70,14 @@ public class Survey implements Entity<Integer> {
         this.questionsIdsJson = gson.toJson(questionIds);
     }
 
-    public List<String> getAnswers() {
+    public List<List<String>> getAnswers() {
         if (answers == null && answersJson != null) {
-            answers = gson.fromJson(answersJson, new TypeToken<List<String>>(){}.getType());
+            answers = gson.fromJson(answersJson, new TypeToken<List<List<String>>>(){}.getType());
         }
         return answers;
     }
 
-    public void setAnswers(List<String> answers) {
+    public void setAnswers(List<List<String>> answers) {
         this.answers = answers;
         this.answersJson = gson.toJson(answers);
     }

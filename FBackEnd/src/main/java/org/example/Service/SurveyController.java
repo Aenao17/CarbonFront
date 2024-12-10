@@ -32,10 +32,7 @@ public class SurveyController {
     @GetMapping("/{id}/questions/details")
     public List<Question> getSurveyQuestionsDetails(@PathVariable int id) {
         Survey survey = surveyHibernateRepository.find(id);
-        return survey.getQuestionsIds()
-                .stream()
-                .map(questionRepository::findById)
-                .collect(Collectors.toList());
+        return survey.getQuestionsIds().stream().map(questionRepository::findById).collect(Collectors.toList());
     }
 
     // Submit survey responses
@@ -51,7 +48,7 @@ public class SurveyController {
         // Validate responses
         for (int i = 0; i < existingQuestions.size(); i++) {
             Question question = questionRepository.findById(existingQuestions.get(i));
-            String answer = survey.getAnswers().get(i);
+            String answer = String.valueOf(survey.getAnswers().get(i));
 
             if (!validateAnswer(question, answer)) {
                 return ResponseEntity.badRequest().body(-1);
@@ -81,11 +78,21 @@ public class SurveyController {
 
         for (int i = 0; i < survey.getQuestionsIds().size(); i++) {
             Integer questionId = survey.getQuestionsIds().get(i);
-            String answer = survey.getAnswers().get(i);
+            Question question = questionRepository.findById(questionId);
+            List<String> dbAnswer = question.getOptions();
+            List<String> answerFromSurvey = survey.getAnswers().get(i);
 
+            totalScore = 0;
             try {
-                int numericAnswer = Integer.parseInt(answer);
-                totalScore += numericAnswer * constants.getOrDefault(questionId, 1);
+                // Mergem prin fiecare raspuns dat si vedem daca da match cu cele salvate in DB. daca da adaugam scorul atasat
+                for (String answer : answerFromSurvey) {
+                    for (int j = 1; j <= dbAnswer.size(); j++) {
+                        if (dbAnswer.get(i).equals(answer)) {
+                            totalScore += question.getCo2Values().get(i);
+                        }
+                    }
+
+                }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid answer for question ID " + questionId);
             }

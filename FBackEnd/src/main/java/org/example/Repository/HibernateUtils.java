@@ -28,7 +28,7 @@ public class HibernateUtils {
                 .addAnnotatedClass(Survey.class)
                 .setProperty("hibernate.dialect", "org.hibernate.community.dialect.SQLiteDialect")
                 .setProperty("hibernate.connection.driver_class", "org.sqlite.JDBC")
-                .setProperty("hibernate.connection.url", "jdbc:sqlite:C:/Users/letar/Desktop/internship/m100-projects-teamn6/FBackEnd/CarbonDB.sqlite")
+                .setProperty("hibernate.connection.url", "jdbc:sqlite:C:CarbonDB.sqlite")
                 .setProperty("hibernate.show_sql", "true")
                 .setProperty("hibernate.format_sql", "true")
                 .setProperty("spring.jpa.hibernate.ddl-auto", "true")
