@@ -35,69 +35,72 @@ public class SurveyController {
         return survey.getQuestionsIds().stream().map(questionRepository::findById).collect(Collectors.toList());
     }
 
-    // Submit survey responses
     @PostMapping("/{id}/submit")
     public ResponseEntity<Integer> submitSurvey(@PathVariable Integer id, @RequestBody Survey survey) {
-        Survey existingSurvey = surveyHibernateRepository.find(id);
+        // Retrieve the existing survey from the repository based on the provided id
+        Survey existingSurvey = surveyHibernateRepository.getAll().get(id - 1);
+        if (existingSurvey == null) {
+            return ResponseEntity.notFound().build();  // Return 404 if survey not found
+        }
+
         List<Integer> existingQuestions = existingSurvey.getQuestionsIds();
 
-        if (survey.getQuestionsIds().size() != existingQuestions.size()) {
-            return ResponseEntity.badRequest().body(-1); // Return an error score
-        }
 
         // Validate responses
-        for (int i = 0; i < existingQuestions.size(); i++) {
-            Question question = questionRepository.findById(existingQuestions.get(i));
-            String answer = String.valueOf(survey.getAnswers().get(i));
 
-            if (!validateAnswer(question, answer)) {
-                return ResponseEntity.badRequest().body(-1);
+        for(int existingQuestionId: survey.getQuestionsIds())
+                for (List<String> answers : survey.getAnswers())
+                    for( String answer: answers){
+                        if (!validateAnswer(questionRepository.findById(existingQuestionId), answer)) {
+                            return ResponseEntity.badRequest().body(-2); // Return error if answer validation fails
+                }
             }
-        }
 
-        // Calculate score
+        // Calculate the score if all answers are valid
         int totalScore = calculateScore(survey);
-        return ResponseEntity.ok(totalScore);
+        return ResponseEntity.ok(totalScore);  // Return the calculated score
     }
 
     private boolean validateAnswer(Question question, String answer) {
         if ("single-choice".equals(question.getType()) || "multiple-choice".equals(question.getType())) {
             try {
-                int numericAnswer = Integer.parseInt(answer);
-                return numericAnswer > 0;
+                // Validate that the answer is numeric and greater than 0
+
+                return Integer.parseInt(answer) >= 0;
+
             } catch (NumberFormatException e) {
-                return false;
+                return false;  // Return false if the answer cannot be parsed as an integer
             }
         }
         return true;
     }
 
     private int calculateScore(Survey survey) {
-        Map<Integer, Integer> constants = Map.of(1, 2, 2, 3, 3, 5);
         int totalScore = 0;
 
+        // Iterate through each question ID in the survey
         for (int i = 0; i < survey.getQuestionsIds().size(); i++) {
             Integer questionId = survey.getQuestionsIds().get(i);
             Question question = questionRepository.findById(questionId);
-            List<String> dbAnswer = question.getOptions();
+
+            if (question == null) {
+                continue; // Skip if the question is not found
+            }
+
             List<String> answerFromSurvey = survey.getAnswers().get(i);
+            List<Double> co2_values = question.getCo2Values();
 
-            totalScore = 0;
+            // Calculate CO2 score based on answers for each question
             try {
-                // Mergem prin fiecare raspuns dat si vedem daca da match cu cele salvate in DB. daca da adaugam scorul atasat
-                for (String answer : answerFromSurvey) {
-                    for (int j = 1; j <= dbAnswer.size(); j++) {
-                        if (dbAnswer.get(i).equals(answer)) {
-                            totalScore += question.getCo2Values().get(i);
-                        }
-                    }
-
+                for (int j = 0; j < answerFromSurvey.size() - 1; j++) {
+                    String answer = answerFromSurvey.get(j);
+                    totalScore += (int) (Integer.parseInt(answer) * co2_values.get(j));  // Use the correct index for co2 values
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid answer for question ID " + questionId);
             }
         }
-        return totalScore;
+        return totalScore;  // Return the final calculated score
     }
 
     // Add a new survey
