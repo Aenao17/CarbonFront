@@ -8,6 +8,8 @@ import {
     IonText, IonCardContent, IonCard,
 } from "@ionic/react";
 import { checkmarkCircleOutline, lockClosedOutline } from "ionicons/icons";
+import facebookImg from "../pages/images/Facebook.png";
+import twitterImg from "../pages/images/twitter.png";
 import "./style/Login.css";
 const Login = () => {
 
@@ -24,8 +26,7 @@ const Login = () => {
         const response = await fetch('http://localhost:8080/auth/login',{
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 'id': id,
@@ -46,9 +47,9 @@ const Login = () => {
     return (
         <IonPage>
             <IonCard className="login-content">
-                <IonCardContent className="login-content">
-                    <div className="login-container">
-                        <h1 className="login-title">Login</h1>
+            <IonCardContent className="login-content">
+                <div className="login-container">
+                    <h1 className="login-title">Login</h1>
 
                         <div className="input-wrapper">
                             <IonInput
@@ -78,12 +79,12 @@ const Login = () => {
                             LOGIN
                         </IonButton>
 
-                        {/* Link pentru Sign Up */}
-                        <IonText className="signup-text">
-                            Don’t have an account? <a href="/register">Sign up</a>
-                        </IonText>
-                    </div>
-                </IonCardContent>
+                    {/* Link pentru Sign Up */}
+                    <IonText className="signup-text">
+                        Don’t have an account? <a href="/register">Sign up</a>
+                    </IonText>
+                </div>
+            </IonCardContent>
             </IonCard>
         </IonPage>
     );

@@ -83,4 +83,14 @@ public class QuestionHibernateRepository implements QuestionRepository {
             }
         }
     }
+    @Override
+    public Question findById(Integer id) {
+        try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+            return session.find(Question.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

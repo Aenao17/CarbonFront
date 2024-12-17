@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="CarbonDB" uuid="a836f279-a972-487d-bbf3-81231edf1809">
+    <data-source source="LOCAL" name="CarbonDB" uuid="531d5f50-5e8a-491f-9bc1-3bd61b0a6d46">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\Master\Desktop\internship\m100-projects-teamn6\FBackEnd\CarbonDB.sqlite</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\letar\Desktop\internship\m100-projects-teamn6\FBackEnd\CarbonDB.sqlite</jdbc-url>
       <jdbc-additional-properties>
         <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
       </jdbc-additional-properties>

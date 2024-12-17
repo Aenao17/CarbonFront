@@ -1,82 +1,95 @@
 package org.example.Domain;
 
 import jakarta.persistence.*;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-/**
- * Entity representing a question.
- */
+import java.util.List;
+
 @jakarta.persistence.Entity
 @Table(name = "Questions")
 public class Question implements Entity<Integer> {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Automatically generates ID values
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "text")
     private String text;
 
-    /**
-     * Constructor with ID and text.
-     *
-     * @param id the ID of the question
-     * @param text the text of the question
-     */
-    public Question(Integer id, String text) {
+    @Column(name = "type")
+    private String type; // Ex: single-choice, multiple-choice, open-ended
+
+    @Column(name = "options")
+    private String optionsJson;
+
+    @Column(name = "co2_values")
+    private String co2ValuesJson;
+
+    @Transient
+    private List<String> options;
+
+    @Transient
+    private List<Double> co2Values;
+
+    private static final Gson gson = new Gson();
+
+    public Question() {}
+
+    public Question(Integer id, String text, String type, List<String> options, List<Double> co2Values) {
         this.id = id;
         this.text = text;
+        this.type = type;
+        setOptions(options);
+        setCo2Values(co2Values);
     }
 
-    /**
-     * Constructor with text only.
-     *
-     * @param text the text of the question
-     */
-    public Question(String text) {
-        this.text = text;
-    }
-
-    /**
-     * Default constructor for JPA.
-     */
-    public Question() {
-        // Default constructor
-    }
-
-    /**
-     * Gets the ID of the question.
-     *
-     * @return the ID of the question
-     */
+    @Override
     public Integer getId() {
         return id;
     }
 
-    /**
-     * Sets the ID of the question.
-     *
-     * @param id the ID to set
-     */
+    @Override
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     * Gets the text of the question.
-     *
-     * @return the text of the question
-     */
     public String getText() {
         return text;
     }
 
-    /**
-     * Sets the text of the question.
-     *
-     * @param text the text to set
-     */
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public List<String> getOptions() {
+        if (options == null && optionsJson != null) {
+            options = gson.fromJson(optionsJson, new TypeToken<List<String>>(){}.getType());
+        }
+        return options;
+    }
+
+    public void setOptions(List<String> options) {
+        this.options = options;
+        this.optionsJson = gson.toJson(options);
+    }
+
+    public List<Double> getCo2Values() {
+        if (co2Values == null && co2ValuesJson != null) {
+            co2Values = gson.fromJson(co2ValuesJson, new TypeToken<List<Double>>(){}.getType());
+        }
+        return co2Values;
+    }
+
+    public void setCo2Values(List<Double> co2Values) {
+        this.co2Values = co2Values;
+        this.co2ValuesJson = gson.toJson(co2Values);
     }
 }
