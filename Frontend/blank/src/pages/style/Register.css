@@ -1,0 +1,103 @@
+.register-content {
+    --background: linear-gradient(to bottom, #e8f5e9, #c8e6c9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+
+.register-container {
+    background: white;
+    width: 25rem;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Titlul */
+.register-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #4caf50;
+    margin-bottom: 1rem;
+}
+
+
+.input-wrapper {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.register-input {
+    width: 100%;
+    padding: 0.8rem 3rem 0.8rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.input-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.4rem;
+    color: #4caf50;
+}
+
+
+.register-button {
+    background-color: #4caf50;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.register-button:hover {
+    background-color: #45a049;
+}
+
+
+.login-text {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #757575;
+}
+
+.login-text a {
+    color: #4caf50;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login-text a:hover {
+    text-decoration: underline;
+}
+
+
+.social-login {
+    margin-top: 2rem;
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.facebook-button {
+    --background: #3b5998;
+    --color: white;
+}
+
+.twitter-button {
+    --background: #1da1f2;
+    --color: white;
+}

@@ -1,0 +1,28 @@
+/* Apply global styles to fit the desired design */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: linear-gradient(to bottom, rgb(185, 223, 113), rgb(94, 140, 97)); /* Matches the green background in your design */
+  }
+  
+  .illustration {
+    margin-bottom: 20px;
+  }
+  
+  .image {
+    width: 650px;
+    height: auto;
+    margin-left: 110px;
+  }
+  
+  .title {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    margin: 0;
+  }
+  
