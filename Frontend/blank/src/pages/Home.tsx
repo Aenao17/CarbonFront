@@ -12,16 +12,34 @@ import Emissions from '../imagine/Emissions.svg'
 import Goal from '../imagine/Goal.svg'
 import home from '../imagine/Home.svg'
 import './style/Home.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useHistory } from "react-router-dom"
+
 import femeie from '../imagine/femeie-cu-planta-removebg-preview.png'
 import grafic from '../imagine/grafic-removebg-preview.png'
 const Home: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0); // Tracks the active navigation button
   const middleIcons = [home, Leaderboard, Emissions , Goal]; // Icons from Ionicons library
+  const history = useHistory();
+
 
   const handleButtonClick = (index: number) => {
     setActiveIndex(index);
+
+    if (index === 0) {
+        history.push("/home") //Home
+    }
+    if (index === 1){
+        history.push("/leaderboard");
+    }
+    if (index === 2){
+        history.push("/Chestionar");
+    }
+    if (index === 3) {
+        history.push("/Register");
+    }
   };
+  
 
   return (
     <IonPage>

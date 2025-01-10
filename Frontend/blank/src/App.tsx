@@ -2,11 +2,12 @@ import React, {useState,useEffect} from 'react';
 import { IonApp, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { IonRouterOutlet } from '@ionic/react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom'; // Use Switch from react-router-dom v5
 import Home from './pages/Home';
 import Loading from './pages/Loading';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import Chestionar from './pages/Chestionar';
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -47,7 +48,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 8000); // 8 seconds loading delay
+    }, 1200); // 5 seconds loading delay
     return () => clearTimeout(timer);
   }, []);
 
@@ -58,18 +59,15 @@ const App: React.FC = () => {
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        <Route exact path="/register">
-          <Register />
-        </Route>
+        <Switch>
+          
+          
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/Chestionar" component={Chestionar} />
+          <Redirect exact from="/" to="/home" />
+        </Switch>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

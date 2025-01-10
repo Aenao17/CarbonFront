@@ -1,0 +1,111 @@
+/* Set the background of the entire page */
+body {
+    background: linear-gradient(to bottom, #92A78D, #5E8C61);
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Center the calculator content */
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(to bottom, rgb(185, 223, 113), rgb(94, 140, 97)); /* Matches the green background in your design */ 
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* Style the question text */
+  .question {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 32px;
+    color: #2F4F4F; /* Dark slate gray for better contrast */
+  }
+  
+  /* Button group container */
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+  
+  /* Buttons styling */
+  .button-group button {
+    width: 100%;
+    padding: 16px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 2px solid #2F4F4F; /* Dark border */
+    background-color: #ffffff; /* Default white background */
+    color: #2F4F4F; /* Dark slate gray text */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  /* Button hover effect */
+  .button-group button:hover {
+    background-color: #5E8C61; /* Match the gradient green */
+    color: white;
+  }
+  
+  /* Button active/pressed state */
+  .button-group button:active,
+  .button-group button.selected {
+    background-color: #2F4F4F; /* Dark slate gray when active */
+    color: white;
+    border-color: #2F4F4F;
+    transform: scale(0.98); /* Slight shrink effect */
+  }
+  
+  /* Navigation buttons (Back/Continue) */
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 24px;
+  }
+  
+  .navigation button {
+    flex: 1;
+    padding: 12px;
+    margin: 0 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    background-color: #2F4F4F; /* Dark background */
+    color: #fff; /* White text */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .navigation button:hover {
+    background-color: #5E8C61; /* Match the gradient green */
+  }
+  
+  .navigation button:disabled {
+    background-color: #ccc; /* Grey background */
+    color: #666; /* Grey text */
+    cursor: not-allowed;
+  }
+  
+  /* Result display styling */
+  .result {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #2F4F4F; /* Dark slate gray */
+    margin-top: 32px;
+  }
+  
