@@ -28,5 +28,6 @@ public class UserController {
         return UserHibernateRepository.find(id); // Returns a user by their ID
     }
 
+
     // Additional CRUD methods can be added here
 }

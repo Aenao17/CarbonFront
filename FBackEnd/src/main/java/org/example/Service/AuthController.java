@@ -1,5 +1,6 @@
 package org.example.Service;
 
+import org.example.Domain.DTO.UserDTO;
 import org.example.Domain.User;
 import org.example.Repository.UserRepository;
 import org.example.Security.JwtUtil;
@@ -29,11 +30,12 @@ public class AuthController {
 
     @CrossOrigin(origins = "http://localhost:8100")
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody User registerRequest) {
+    public ResponseEntity<?> register(@RequestBody UserDTO registerRequest) {
         if (userRepository.getByUsername(registerRequest.getUsername()) != null) {
             return ResponseEntity.status(409).body("{\"status\":\"Username already exists\"}");
         }
-        userRepository.add(registerRequest);
+        User user = new User(0, registerRequest.getUsername(), registerRequest.getPassword());
+        userRepository.add(user);
         return ResponseEntity.ok("{\"status\":\"ok\"}");
     }
 
